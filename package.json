@@ -1,0 +1,11 @@
+{
+  "name": "fullstackopen-exercises-part3",
+  "version": "1.0.0",
+  "description": "Exercises for Full Stack Open Part 3, which requires a new repository",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tim Fau",
+  "license": "MIT"
+}
