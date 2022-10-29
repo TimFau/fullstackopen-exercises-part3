@@ -6,7 +6,10 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "flyctl deploy",
+    "deployNoCache": "flyctl deploy --no-cache --strategy immediate",
+    "status": "flyctl status --all"
   },
   "author": "Tim Fau",
   "license": "MIT",
