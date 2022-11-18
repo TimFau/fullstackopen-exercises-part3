@@ -16,7 +16,7 @@ app.use(morgan(function (tokens, req, res) {
 }))
 
 app.use(express.json())
-// app.use(morgan('tiny'))
+app.use(express.static('build'))
 
 let persons = [
     { 
