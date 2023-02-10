@@ -1,7 +1,6 @@
 require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
-const mongoose = require('mongoose')
 const Person = require('./models/person')
 const app = express()
 
@@ -42,7 +41,7 @@ app.post('/api/persons', (request, response) => {
     const name = request.body.name,
           number = request.body.number,
           id = Math.floor(Math.random() * 9999),
-          nameExists = persons.find(person => person.name === name),
+        //   nameExists = Person.find(person => person.name === name),
           handleError = (msg) => response.status(400).json({ error: msg })
     if (!name) {
         return handleError('Name Required')
@@ -50,16 +49,19 @@ app.post('/api/persons', (request, response) => {
     if (!number) {
         return handleError('Number Required')
     }
-    if (nameExists) {
-        return handleError('Name must be unique')
-    }
-    const newPerson = {
+    // if (nameExists) {
+    //     return handleError('Name must be unique')
+    // }
+    const person = new Person({
         id: id,
         name: name,
-        number: number
-    }
-    persons = persons.concat(newPerson)
-    response.json(newPerson)
+        number: number,
+        important: false
+    })
+
+    person.save().then(savedPerson => {
+        response.json(savedPerson)
+    })
 })
 
 app.delete('/api/persons/:id', (request, response) => {
