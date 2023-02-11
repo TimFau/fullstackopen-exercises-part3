@@ -2,6 +2,6 @@ POST http://phonebook-backend-timfau.fly.dev/api/persons
 content-type: application/json
 
 {
-    "name": "Test Person7",
+    "name": "Fly Test4",
     "number": "555-555-7777"
 }
