@@ -10,7 +10,7 @@ const unkownEndpoint = (request, response) => {
 }
 
 const errorHandler = (error, request, response, next) => {
-    console.log('errorHandler', error.message)
+    console.log('errorHandlerName: ', error.name, 'errorHandlermessage: ', error.message)
 
     if (error.name === 'CastError') {
         response.status(404).send({ error: 'malformatted id' })
@@ -77,6 +77,14 @@ app.post('/api/persons', (request, response, next) => {
         important: false
     })
 
+    const validateError = person.validateSync();
+
+
+    if (validateError) {
+        console.log('validateError', validateError)
+        return next(validateError)
+    }
+
     person.save().then(savedPerson => {
         response.json(savedPerson)
     }).catch(error => next(error))
@@ -91,7 +99,7 @@ app.put('/api/persons/:id', (request, response, next) => {
         number: body.number
     }
 
-    Person.findByIdAndUpdate(request.params.id, person, { new: true }).then(updatedPerson => {
+    Person.findByIdAndUpdate(request.params.id, person, { new: true, runValidators: true, context: 'query' }).then(updatedPerson => {
         console.log('person', updatedPerson)
         response.json(updatedPerson)
     })
