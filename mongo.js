@@ -6,8 +6,8 @@ if (process.argv.length < 3) {
 }
 
 const password = process.argv[2],
-      name = process.argv[3],
-      number = process.argv[4]
+  name = process.argv[3],
+  number = process.argv[4]
 
 const url = `mongodb+srv://timfau:${password}@cluster0.q0msdh2.mongodb.net/phonebookApp?retryWrites=true&w=majority`
 
@@ -22,7 +22,7 @@ const Person = mongoose.model('Person', personSchema)
 
 mongoose
   .connect(url)
-  .then((result) => {
+  .then(() => {
     console.log('connected')
 
     if (name && number) {
@@ -33,7 +33,7 @@ mongoose
         date: new Date(),
         important: true,
       })
-  
+
       return person.save().then(() => {
         console.log('added ' + name + ' number ' + number + ' to phonebook')
       })
